@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"fmt"
 	"github.com/xizahk/gowebsite/app/model"
+	"github.com/xizahk/gowebsite/app/database"
 )
 
 var usersWithImages []model.UserWithImages
@@ -13,7 +14,7 @@ var usersWithImages []model.UserWithImages
 //   queried from pictures database.
 func GetUsersWithImagesHandler(writer http.ResponseWriter, route *http.Request) {
 	// Get users with images from database
-	usersWithImages, err := GetUsersWithImages()
+	usersWithImages, err := database.GetUsersWithImages()
 	// Convert usersWithImages variable to JSON
 	usersWithImagesList, err := json.Marshal(usersWithImages)
 
