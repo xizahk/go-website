@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>The Picture Gallery</title>
+</head>
+
+
+<body>
+  <h1>The Picture Gallery</h1>
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>Images</th>
+    </tr>
+    </tr>
+  </table>
+  <br/>
+
+  <script>
+    // Create a table of username with corresponding images
+    userWithImagesTable = document.querySelector("table")
+    fetch("/userWithImages")
+      .then(response => response.json())
+      .then(userWithImagesList => {
+        // Create a row for every user
+        userWithImagesList.forEach(userWithImages => {
+          row = document.createElement("tr")
+          username = document.createElement("td")
+          username.innerHTML = userWithImages.user.username
+          row.appendChild(username)
+          // Append each image to the same row
+          userWithImages.images.forEach(image => {
+            var img = new Image();
+            img.src = image.imageurl;
+            img.setAttribute("class", "td");
+            img.setAttribute("width", "200");
+            img.setAttribute("height", "200");
+            img.setAttribute("alt", "guacamole");
+            row.appendChild(img)
+          })
+          // Append each row to the Table
+          userWithImagesTable.appendChild(row)
+        })
+      })
+</script>
+</body>
+
+</html>
